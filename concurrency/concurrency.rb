@@ -181,15 +181,21 @@ class BackgroundTask
 
   public
   
-    # executes the block using the thread pool.
-    def run( thread_pool )
+    # executes the block using the thread pool if provided or spawns a new thread if not.
+    def run( thread_pool=nil )
       @mutex.synchronize do
         if @scheduled
           raise BackgroundTask::Error.new( "::run() called on #{self} more than once." )
         end
         @scheduled = true
-        thread_pool.add_job do
-          run_block
+        if thread_pool 
+          thread_pool.add_job do
+            run_block
+          end
+        else
+          thread = Thread.new do
+            run_block
+          end
         end
       end
     end

@@ -34,8 +34,28 @@ def collect1 pages
   results
 end
 
-# collect with concurrency
+# collect with concurrency using the BackgroundTasks directory
 def collect2 pages
+  id = 'joshuabaer'
+  results = []
+  tasks = []
+  1.upto pages do |page|
+    puts "queueing page #{page}"
+    task = BackgroundTask.new do 
+      http_get id, page
+    end
+    tasks << task
+    task.run
+  end
+    tasks.each do |task|
+      puts "task retrieved"
+      results += task.result
+    end
+  results
+end  
+
+# collect with concurrency using the TaskCollection
+def collect3 pages
   id = 'joshuabaer'
   results = []
   tasks = TaskCollection.new( 1 )
