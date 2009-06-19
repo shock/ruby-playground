@@ -94,6 +94,9 @@ class ThreadTest
     puts "After: #{Process.mem_used}K"
     puts "Time: #{Time.now - start_time} secs"
   end
+  
+  def background_test
+  end
 end
 
 tt = ThreadTest.new

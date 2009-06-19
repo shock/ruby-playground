@@ -5,6 +5,7 @@ require 'net/https'
 require 'json'
 require 'concurrency'
 require 'pp'
+@@page = 0
 
 def http_get id, page, type='json'
   http = Net::HTTP.new('twitter.com', 80)
@@ -14,7 +15,8 @@ def http_get id, page, type='json'
     req.basic_auth "buzzmanager_api", "buzzshock"
     puts "getting #{path}"
     resp, data = http_inst.request(req)
-    puts "done"
+    @@page += 1
+    puts "* DONE - #{@@page}"
     data
   end
   results = JSON.parse(data)
@@ -22,6 +24,7 @@ def http_get id, page, type='json'
   results.sort {|a,b| a["screen_name"] <=> b["screen_name"]}
 end
 
+# collect the old-fashioned serial way
 def collect1 pages
   id = 'joshuabaer'
   results = []
@@ -31,18 +34,29 @@ def collect1 pages
   results
 end
 
+# collect with concurrency
 def collect2 pages
   id = 'joshuabaer'
   results = []
-  jobs = []
+  tasks = TaskCollection.new
   1.upto pages do |page|
-    bj = BackgroundJob.new do 
+    task = BackgroundTask.new do 
       http_get id, page
     end
-    jobs << bj
+    tasks << task
   end
-  jobs.each do |bj|
-    results += bj.result
+  i=0
+  loop do
+    i+=1
+    puts "getting next task..."
+    task = tasks.next_finished
+    if !task
+      puts "no more tasks"
+      break
+    else
+      puts "task retrieved #{i}"
+      results += task.result
+    end
   end
   results
 end  
@@ -61,15 +75,13 @@ def write_it( filename, contents )
 end
 
 def test
-  pages = 10
+  pages = 15
   results1 = time_it {collect1 pages}
-  write_it( "results1", results1.to_yaml )
-  puts
   results2 = time_it {collect2 pages}
-  write_it( "results2", results2.to_yaml )
-  puts
+  # verify it
   puts "results1 == results2 => #{results1 == results2}"
 end
 
-test
+# test
+collect2 15
 
