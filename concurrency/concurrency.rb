@@ -36,8 +36,10 @@ class ThreadPool
   end
  
   def add_job(*args, &block)
+    puts "about to queue the job"
     @work << [args, block]
     self
+    puts "job queued"
   end
  
   def shutdown(wait=true)
@@ -57,17 +59,21 @@ class TaskCollection
         @mutex.synchronize do
           @waiting.push Thread.current
         end
+        puts "waiting on active task count #{@active_task_count} to fall below #{@pool_size}"
         sleep 10
       else
         break
       end
     end
+    puts "setting the variables"
     @mutex.synchronize do
       @active_task_count += 1
-      task.collection = self
       @collection << task
-      task.run( @thread_pool )
     end
+    puts "setting the collection on the task"
+    task.collection = self
+    puts "calling run on the task"
+    task.run( @thread_pool )
   end
   
   # returns the next finished task from the collection or nil if no tasks are left.
@@ -183,21 +189,24 @@ class BackgroundTask
   
     # executes the block using the thread pool if provided or spawns a new thread if not.
     def run( thread_pool=nil )
+      puts "checking and setting @scheduled"
       @mutex.synchronize do
         if @scheduled
           raise BackgroundTask::Error.new( "::run() called on #{self} more than once." )
         end
         @scheduled = true
+      end
         if thread_pool 
+          puts "running the task using the thread pool"
           thread_pool.add_job do
             run_block
           end
+          puts "thread_pool job added."
         else
           thread = Thread.new do
             run_block
           end
         end
-      end
     end
 
     def collection= collection

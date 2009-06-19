@@ -47,18 +47,18 @@ def collect2 pages
     tasks << task
     task.run
   end
-    tasks.each do |task|
-      puts "task retrieved"
-      results += task.result
-    end
+  tasks.each do |task|
+    puts "task retrieved"
+    results += task.result
+  end
   results
 end  
 
 # collect with concurrency using the TaskCollection
 def collect3 pages
-  id = 'joshuabaer'
+  id = 'barackobama'
   results = []
-  tasks = TaskCollection.new( 1 )
+  tasks = TaskCollection.new( 50 )
   1.upto pages do |page|
     puts "queueing page #{page}"
     task = BackgroundTask.new do 
@@ -104,5 +104,5 @@ def test
 end
 
 # test
-collect2 15
+collect3 100
 
