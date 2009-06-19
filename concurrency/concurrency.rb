@@ -3,7 +3,124 @@
 # Author: William D. Doughty 
 # Date: 06/18/09
 #
-#
+
+require 'thread'
+
+class ThreadPool
+  def initialize(size)
+    @work = Queue.new
+    @group = ThreadGroup.new
+    @shutdown = false
+    size.times do
+      Thread.new do
+        @group.add(Thread.current)
+        Thread.stop
+        loop do
+          if @shutdown
+            puts "#{Thread.current} stopping";
+            Thread.current.terminate
+          end
+          job = @work.pop # threads wait here for a job
+          args, block = *job
+          begin
+            block.call(*args)
+          rescue StandardError => e
+            bt = e.backtrace.join("\n")
+            $stderr.puts "Error in thread (please catch this): #{e.inspect}\n#{bt}"
+          end
+          Thread.pass
+        end
+      end
+    end
+    @group.list.each { |w| w.run }
+  end
+ 
+  def add_job(*args, &block)
+    @work << [args, block]
+    self
+  end
+ 
+  def shutdown(wait=true)
+    @group.enclose
+    @shutdown = true
+    @group.list.first.join until @group.list.empty? if wait
+  end
+end
+
+# class to manage a collection of BackgroundTasks.
+class TaskCollection
+  
+  # adds a task to the collection. ordering of tasks is not preserved
+  def << task
+    loop do
+      if @active_task_count > @pool_size
+        @mutex.synchronize do
+          @waiting.push Thread.current
+        end
+        sleep 10
+      else
+        break
+      end
+    end
+    @mutex.synchronize do
+      @active_task_count += 1
+      task.collection = self
+      @collection << task
+      task.run( @thread_pool )
+    end
+  end
+  
+  # returns the next finished task from the collection or nil if no tasks are left.
+  # if all remaining tasks are still working, this method will wait until one finishes
+  def next_finished
+    @caller_thread = Thread.current
+    return nil if @collection.length == 0
+    finished_task = nil
+    while !finished_task do
+      # puts "looping : #{@collection.length}"
+      i=0
+      @collection.each do |task|
+        i+=1
+        if task.finished
+          # puts "Yes, it's finished #{i}"
+          finished_task = @collection.delete(task)
+          break
+        else
+          # puts "No, it's not finished #{i}"
+        end
+      end
+      if @active_task_count > 0
+        puts "sleeping with #{@active_task_count} tasks still running."
+        @mutex.synchronize do
+          @waiting.push Thread.current
+        end
+        sleep 10
+      end
+    end
+    finished_task
+  end
+  
+  def task_completed
+    @mutex.synchronize do
+      @active_task_count -= 1
+      puts "Someone told the collection to wakeup."
+      while thread = @waiting.shift do
+        thread.wakeup
+      end
+    end
+  end
+  
+  def initialize( size = 100 )
+    @waiting = []
+    @pool_size = size
+    @thread_pool = ThreadPool.new( size )
+    @mutex = Mutex.new
+    @collection = []
+    @active_task_count = 0
+  end
+end
+
+
 # Class to run a Proc in the background.
 # Usage:
 #   
@@ -48,21 +165,31 @@ class BackgroundTask
     
   private
     
+    def run_block
+      @mutex.synchronize do
+        begin
+          @result = @block.call
+        rescue => exception
+          @exception = exception
+        end
+        @finished = true
+        if @collection
+          @collection.task_completed
+        end
+      end
+    end
+
   public
   
-    def run
-      if @thread
-        raise BackgroundTask::Error.new( ":run() called more than once on #{self}." )
-      else
-        @thread = Thread.new do
-          begin
-            Thread.current[:result] = @block.call
-          rescue => exception
-            Thread.current[:exception] = exception
-          end
-          if @collection
-            @collection.run
-          end
+    # executes the block using the thread pool.
+    def run( thread_pool )
+      @mutex.synchronize do
+        if @scheduled
+          raise BackgroundTask::Error.new( "::run() called on #{self} more than once." )
+        end
+        @scheduled = true
+        thread_pool.add_job do
+          run_block
         end
       end
     end
@@ -76,84 +203,31 @@ class BackgroundTask
     # execution of the current thread will block until it does.
     # If an exception occurrs while processing the Proc, it will be rethrown here.
     def result
-      if !@thread
-        raise BackgroundTask::Error.new( ":result() called on #{self}. that has never been run." )
-      else
-        @thread.join
-        raise @thread[:exception] if @thread[:exception]
-        return @thread[:result]
+      @mutex.synchronize do
+        if !@scheduled
+          raise BackgroundTask::Error.new( ":result() called on #{self} that has not been run." )
+        end
+        raise @exception if @exception
+        return @result
       end
     end
     
     # returns true if the task has finished.
     def finished
-      # puts "#{@thread} - #{@thread.status}"
-      return @thread.status == false
+      @finished
     end
   
     # Creates a new BackgroundTask object and begins processing of the supplied Proc
     # immediately.  Call BackgroundTask::result() to retrieve the results.
-    def initialize ( &block )
+    def initialize( &block )
       @block = block
       @collection = nil
+      @finished = nil
+      @caller = nil
+      @scheduled = nil
+      @mutex = Mutex.new
     end
 end
 
-# class to manage a collection of BackgroundTasks.
-class TaskCollection
-  
-  # adds a task to the collection. ordering of tasks is not preserved
-  def << task
-    task.collection = self
-    @collection << task
-    @mutex.synchronize do
-      @active_task_count += 1
-    end
-    task.run
-  end
-  
-  # returns the next finished task from the collection or nil if no tasks are left.
-  # if all remaining tasks are still working, this method will wait until one finishes
-  def next_finished
-    @current_thread = Thread.current
-    return nil if @collection.length == 0
-    finished_task = nil
-    while !finished_task do
-      # puts "looping : #{@collection.length}"
-      i=0
-      @collection.each do |task|
-        i+=1
-        if task.finished
-          # puts "Yes, it's finished #{i}"
-          finished_task = @collection.delete(task)
-          break
-        else
-          # puts "No, it's not finished #{i}"
-        end
-      end
-      if @active_task_count > 0
-        puts "sleeping with #{@active_task_count} tasks still running."
-        sleep 10
-      end
-    end
-    finished_task
-  end
-  
-  def run
-    if @current_thread
-      @mutex.synchronize do
-        @active_task_count -= 1
-      end
-      puts "Someone told the collection to run."
-      @current_thread.run
-    end
-  end
-  
-  def initialize
-    @mutex = Mutex.new
-    @collection = []
-    @active_task_count = 0
-  end
-end
 
 

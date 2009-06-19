@@ -38,8 +38,9 @@ end
 def collect2 pages
   id = 'joshuabaer'
   results = []
-  tasks = TaskCollection.new
+  tasks = TaskCollection.new( 1 )
   1.upto pages do |page|
+    puts "queueing page #{page}"
     task = BackgroundTask.new do 
       http_get id, page
     end
