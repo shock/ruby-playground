@@ -103,6 +103,7 @@ def test
   puts "results1 == results2 => #{results1 == results2}"
 end
 
+
 # test
 collect3 100
 

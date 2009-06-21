@@ -4,10 +4,58 @@
 # Date: 06/18/09
 #
 
+def nputs message
+  # puts message
+end
+
 require 'thread'
+
+
+## This is currently not working.  Causes a deadlock.  
+#
+class BoundedQueue < Queue
+  
+  def wakeup_waiting_threads
+    while thread = @waiting.shift do
+      thread.wakeup
+    end
+  end
+  
+  def pop
+    @mutex.synchronize do
+      if @count > 0
+        @count -= 1
+        wakeup_waiting_threads
+      end
+    end
+    super
+  end
+  
+  def push
+    loop do
+        if @count >= @size
+          @waiting << Thread.current
+          sleep 10
+        else
+          super
+          break
+        end
+      end
+  end
+  
+  def initialize( size )
+    @mutex = Mutex.new
+    @count = 0
+    @size = size
+    @waiting = []
+    super
+  end
+end
+
 
 class ThreadPool
   def initialize(size)
+    @size = size
     @work = Queue.new
     @group = ThreadGroup.new
     @shutdown = false
@@ -17,7 +65,7 @@ class ThreadPool
         Thread.stop
         loop do
           if @shutdown
-            puts "#{Thread.current} stopping";
+            nputs "#{Thread.current} stopping"
             Thread.current.terminate
           end
           job = @work.pop # threads wait here for a job
@@ -36,10 +84,8 @@ class ThreadPool
   end
  
   def add_job(*args, &block)
-    puts "about to queue the job"
     @work << [args, block]
     self
-    puts "job queued"
   end
  
   def shutdown(wait=true)
@@ -52,29 +98,31 @@ end
 # class to manage a collection of BackgroundTasks.
 class TaskCollection
   
-  # adds a task to the collection. ordering of tasks is not preserved
+  # Queues the supplied background task for execution.
   def << task
     loop do
       if @active_task_count > @pool_size
         @mutex.synchronize do
           @waiting.push Thread.current
         end
-        puts "waiting on active task count #{@active_task_count} to fall below #{@pool_size}"
-        sleep 10
+        Thread.stop
       else
         break
       end
     end
-    puts "setting the variables"
     @mutex.synchronize do
       @active_task_count += 1
+      task.collection = self
       @collection << task
+      task.run( @thread_pool )
     end
-    puts "setting the collection on the task"
-    task.collection = self
-    puts "calling run on the task"
-    task.run( @thread_pool )
   end
+  
+  # Creates a background task for the supplied block of code and queues it for execution
+  def add_task &block
+    << background_task BackgroundTask.new block
+  end
+    
   
   # returns the next finished task from the collection or nil if no tasks are left.
   # if all remaining tasks are still working, this method will wait until one finishes
@@ -83,24 +131,24 @@ class TaskCollection
     return nil if @collection.length == 0
     finished_task = nil
     while !finished_task do
-      # puts "looping : #{@collection.length}"
+      # nputs "looping : #{@collection.length}"
       i=0
       @collection.each do |task|
         i+=1
         if task.finished
-          # puts "Yes, it's finished #{i}"
+          # nputs "Yes, it's finished #{i}"
           finished_task = @collection.delete(task)
-          break
+          return finished_task
         else
-          # puts "No, it's not finished #{i}"
+          # nputs "No, it's not finished #{i}"
         end
       end
       if @active_task_count > 0
-        puts "sleeping with #{@active_task_count} tasks still running."
+        nputs "sleeping with #{@active_task_count} tasks still running.  @collection length: #{@collection.length}"
         @mutex.synchronize do
           @waiting.push Thread.current
         end
-        sleep 10
+        sleep 1
       end
     end
     finished_task
@@ -109,17 +157,17 @@ class TaskCollection
   def task_completed
     @mutex.synchronize do
       @active_task_count -= 1
-      puts "Someone told the collection to wakeup."
+      nputs "Someone told the collection to wakeup."
       while thread = @waiting.shift do
         thread.wakeup
       end
     end
   end
   
-  def initialize( size = 100 )
+  def initialize( collection_size = 100, thread_pool=nil )
     @waiting = []
-    @pool_size = size
-    @thread_pool = ThreadPool.new( size )
+    @pool_size = collection_size
+    @thread_pool = thread_pool || ThreadPool.new( collection_size )
     @mutex = Mutex.new
     @collection = []
     @active_task_count = 0
@@ -137,7 +185,7 @@ end
 #   "This is the data I expect my background task to return."
 # end
 # 
-# puts task.result  # => "This is the data I expect my background task to return."
+# nputs task.result  # => "This is the data I expect my background task to return."
 # 
 # The block passed to the BackgroundTask::new begins execution immediately and control
 # is returned to the current thread.
@@ -178,6 +226,7 @@ class BackgroundTask
         rescue => exception
           @exception = exception
         end
+        @block = nil
         @finished = true
         if @collection
           @collection.task_completed
@@ -189,24 +238,21 @@ class BackgroundTask
   
     # executes the block using the thread pool if provided or spawns a new thread if not.
     def run( thread_pool=nil )
-      puts "checking and setting @scheduled"
       @mutex.synchronize do
         if @scheduled
           raise BackgroundTask::Error.new( "::run() called on #{self} more than once." )
         end
         @scheduled = true
-      end
         if thread_pool 
-          puts "running the task using the thread pool"
           thread_pool.add_job do
             run_block
           end
-          puts "thread_pool job added."
         else
           thread = Thread.new do
             run_block
           end
         end
+      end
     end
 
     def collection= collection
@@ -218,7 +264,9 @@ class BackgroundTask
     # execution of the current thread will block until it does.
     # If an exception occurrs while processing the Proc, it will be rethrown here.
     def result
+      nputs "************ here1"
       @mutex.synchronize do
+        nputs "************ here2"
         if !@scheduled
           raise BackgroundTask::Error.new( ":result() called on #{self} that has not been run." )
         end
