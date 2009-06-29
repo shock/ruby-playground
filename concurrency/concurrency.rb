@@ -95,7 +95,7 @@ class ThreadPool
   end
 end
 
-# class to manage a collection of BackgroundTasks.
+# Class to manage scheduling of a collection of BackgroundTasks.
 class TaskCollection
   
   # Queues the supplied background task for execution.
@@ -120,48 +120,36 @@ class TaskCollection
   
   # Creates a background task for the supplied block of code and queues it for execution
   def add_task &block
-    << background_task BackgroundTask.new block
+    self << BackgroundTask.new( &block )
   end
     
   
-  # returns the next finished task from the collection or nil if no tasks are left.
-  # if all remaining tasks are still working, this method will wait until one finishes
+  # Returns the next finished task from the collection or nil if no tasks remain.
+  # If all remaining tasks are still working, this method will block until one finishes
   def next_finished
-    @caller_thread = Thread.current
     return nil if @collection.length == 0
-    finished_task = nil
-    while !finished_task do
-      # nputs "looping : #{@collection.length}"
-      i=0
-      @collection.each do |task|
-        i+=1
-        if task.finished
-          # nputs "Yes, it's finished #{i}"
-          finished_task = @collection.delete(task)
-          return finished_task
-        else
-          # nputs "No, it's not finished #{i}"
-        end
-      end
-      if @active_task_count > 0
-        nputs "sleeping with #{@active_task_count} tasks still running.  @collection length: #{@collection.length}"
-        @mutex.synchronize do
-          @waiting.push Thread.current
-        end
-        sleep 1
-      end
+    finished_task = @finished_queue.pop  # blocks if queue is empty
+    @mutex.synchronize do
+      @collection.delete(finished_task)
     end
     finished_task
   end
   
-  def task_completed
+  # This method should not be called directly.  Each background task calls this method to notify
+  # the collection that it has finished.
+  def task_completed task
     @mutex.synchronize do
       @active_task_count -= 1
-      nputs "Someone told the collection to wakeup."
-      while thread = @waiting.shift do
-        thread.wakeup
-      end
     end
+    @finished_queue.push task
+    while thread = @waiting.shift
+      thread.wakeup
+    end
+  end
+  
+  # Returns true if any remaining tasks have finished, false otherwise
+  def task_ready?
+    !@finished_queue.empty?
   end
   
   def initialize( collection_size = 100, thread_pool=nil )
@@ -171,6 +159,7 @@ class TaskCollection
     @mutex = Mutex.new
     @collection = []
     @active_task_count = 0
+    @finished_queue = Queue.new
   end
 end
 
@@ -229,7 +218,7 @@ class BackgroundTask
         @block = nil
         @finished = true
         if @collection
-          @collection.task_completed
+          @collection.task_completed self
         end
       end
     end
@@ -259,10 +248,9 @@ class BackgroundTask
       @collection = collection
     end
     
-    # Returns the results of the Proc passed to BackgroundTask::new().  
-    # If the task has not finished,
-    # execution of the current thread will block until it does.
-    # If an exception occurrs while processing the Proc, it will be rethrown here.
+    # Returns the result of executing the Proc supplied to the constructor.
+    # If execution has not finished, this method will block until it has.
+    # If an exception occurred while executing the Proc, it will be rethrown here.
     def result
       nputs "************ here1"
       @mutex.synchronize do
@@ -280,8 +268,8 @@ class BackgroundTask
       @finished
     end
   
-    # Creates a new BackgroundTask object and begins processing of the supplied Proc
-    # immediately.  Call BackgroundTask::result() to retrieve the results.
+    # Creates a new BackgroundTask object containing the supplied Proc.
+    # Use BackgroundTask::result() to retrieve the result.
     def initialize( &block )
       @block = block
       @collection = nil

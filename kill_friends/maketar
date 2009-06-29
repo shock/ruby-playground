@@ -1,0 +1,2 @@
+cd ..
+tar cf kill_friends.tar kill_friends

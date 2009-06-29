@@ -82,6 +82,34 @@ def collect3 pages
   results
 end  
 
+# collect with concurrency using the TaskCollection
+def collect4 pages
+  id = 'barackobama'
+  results = []
+  tp = ThreadPool.new( 10 )
+  tasks = TaskCollection.new( 10, tp )
+  i=0
+  1.upto pages do |page|
+    puts "queueing page #{page}"
+    tasks.add_task do
+      http_get id, page
+    end
+    if tasks.task_ready?
+      i+=1
+      puts "GOT A TASK FINISHED WHILE STILL ADDING TASKS"
+      results += tasks.next_finished.result
+    end
+  end
+  puts "getting next task..."
+  while task = tasks.next_finished
+    i+=1
+    puts "task retrieved #{i}"
+    results += task.result
+    puts "getting next task..."
+  end
+  results
+end  
+
 def time_it( &block )
   start_time = Time.now
   result = block.call
@@ -105,5 +133,4 @@ end
 
 
 # test
-collect3 100
-
+collect4 100
