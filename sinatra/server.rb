@@ -1,24 +1,29 @@
 require 'rubygems'
 require 'sinatra'
 require 'json'
-i=0
 
-get '/hi' do
+state={}
+state[:i] = 0
+
+def sinatra_init state
+  get '/:action/:data' do
   
-  output = "Hello World ##{i}!\n#{params.to_json}"
-  i = 0
-  output
-end
+    output = "#{state[:i]} #{params.to_json}"
+    state[:i] = 0
+    output
+  end
 
-
-get '/lo' do
-  "HelLOW World!"
+  get '/lo' do
+    "HelLOW World!"
+  end
 end
 
 t = Thread.new do
   loop do
-    puts "#{i}"
+    puts "#{state[:i]}"
     sleep 1
-    i += 1
+    state[:i] += 1
   end
 end
+
+sinatra_init state
