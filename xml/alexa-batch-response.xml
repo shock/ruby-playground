@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/">
+<aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11">
+<aws:OperationRequest>
+<aws:RequestId>270e67b5-df7c-44ef-ad4e-7e38eabbe43b</aws:RequestId></aws:OperationRequest>
+<aws:UrlInfoResult>
+<aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">google.com/</aws:DataUrl>
+    <aws:Rank>1</aws:Rank>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult>
+<aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/">
+<aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response>
+
+<aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11">
+
+<aws:OperationRequest>
+
+<aws:RequestId>270e67b5-df7c-44ef-ad4e-7e38eabbe43b</aws:RequestId></aws:OperationRequest>
+
+<aws:UrlInfoResult>
+
+<aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">alexa.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult>
+
+<aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/">
+
+<aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response>
+
+<aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11">
+
+<aws:OperationRequest>
+<aws:RequestId>270e67b5-df7c-44ef-ad4e-7e38eabbe43b</aws:RequestId></aws:OperationRequest>
+<aws:UrlInfoResult>
+<aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">yahoo.com/</aws:DataUrl>
+    <aws:Rank>2</aws:Rank>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>270e67b5-df7c-44ef-ad4e-7e38eabbe43b</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">otherinbox.com/</aws:DataUrl>
+    <aws:Rank>58649</aws:Rank>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>270e67b5-df7c-44ef-ad4e-7e38eabbe43b</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">espn.go.com/</aws:DataUrl>
+    <aws:Rank>84</aws:Rank>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>

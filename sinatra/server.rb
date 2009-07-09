@@ -1,22 +1,33 @@
 require 'rubygems'
-require 'sinatra'
 require 'json'
 
 state={}
 state[:i] = 0
 
-def sinatra_init state
-  get '/:action/:data' do
+class SinatraApp
+  require 'sinatra'
   
-    output = "#{state[:i]} #{params.to_json}"
-    state[:i] = 0
-    output
-  end
+  def initialize state
+    # sinatra = Sinatra::Application.new
+    set :app_file, __FILE__
+    set :reload, true
+    disable :run
 
-  get '/lo' do
-    "HelLOW World!"
+    get '/:action/:data' do
+
+      output = "Howdy doody! #{state[:i]} #{params.to_json}"
+      state[:i] = 0
+      output
+    end
+
+    get '/lo' do
+      "HelLOW World!"
+    end
+
+    Sinatra::Application.run!
   end
 end
+
 
 t = Thread.new do
   loop do
@@ -26,4 +37,4 @@ t = Thread.new do
   end
 end
 
-sinatra_init state
+sa = SinatraApp.new state

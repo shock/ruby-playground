@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>efd40483-9bc7-4ac8-bc77-09011b9a758c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaaamazon.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>efd40483-9bc7-4ac8-bc77-09011b9a758c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaaborders.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>efd40483-9bc7-4ac8-bc77-09011b9a758c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaamacaronis.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+#<NameError: UrlInfoResult>
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>efd40483-9bc7-4ac8-bc77-09011b9a758c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaaamazon.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>efd40483-9bc7-4ac8-bc77-09011b9a758c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaaborders.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>efd40483-9bc7-4ac8-bc77-09011b9a758c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaamacaronis.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+ALEXA - Success
+#<NameError: UrlInfoResult>
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>624d8574-daf1-4e8b-9c9f-34846f06fc34</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaaradioshack.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>624d8574-daf1-4e8b-9c9f-34846f06fc34</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaawdoughty.net/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>624d8574-daf1-4e8b-9c9f-34846f06fc34</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaasports.ableton.com/</aws:DataUrl>
+    <aws:Rank>24138</aws:Rank>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+#<NameError: UrlInfoResult>
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>624d8574-daf1-4e8b-9c9f-34846f06fc34</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaaradioshack.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>624d8574-daf1-4e8b-9c9f-34846f06fc34</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaawdoughty.net/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>624d8574-daf1-4e8b-9c9f-34846f06fc34</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaasports.ableton.com/</aws:DataUrl>
+    <aws:Rank>24138</aws:Rank>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+ALEXA - Success
+#<NameError: UrlInfoResult>
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>5fc2cd20-1bb4-4d1a-b98a-dd4036a5c57c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaahilton.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+#<NameError: UrlInfoResult>
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>5fc2cd20-1bb4-4d1a-b98a-dd4036a5c57c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaahilton.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+#<NameError: UrlInfoResult>
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>5fc2cd20-1bb4-4d1a-b98a-dd4036a5c57c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaahilton.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+#<NameError: UrlInfoResult>
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>5fc2cd20-1bb4-4d1a-b98a-dd4036a5c57c</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">aaaahilton.com/</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+ALEXA - Success
+#<NameError: UrlInfoResult>
+<?xml version="1.0"?>
+<aws:UrlInfoResponse xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response><aws:ResponseStatus><aws:StatusCode>AlexaError</aws:StatusCode><aws:StatusMessage>Request could not be execute due to an Alexa error</aws:StatusMessage></aws:ResponseStatus></aws:Response><aws:Response xmlns:aws="http://awis.amazonaws.com/doc/2005-07-11"><aws:OperationRequest><aws:RequestId>3e6e6f48-7b36-4a79-bdd8-1091a3c043b9</aws:RequestId></aws:OperationRequest><aws:UrlInfoResult><aws:Alexa>
+  
+  <aws:TrafficData>
+    <aws:DataUrl type="canonical">404</aws:DataUrl>
+    <aws:Rank/>
+  </aws:TrafficData>
+</aws:Alexa></aws:UrlInfoResult><aws:ResponseStatus xmlns:aws="http://alexa.amazonaws.com/doc/2005-10-05/"><aws:StatusCode>Success</aws:StatusCode></aws:ResponseStatus></aws:Response></aws:UrlInfoResponse>
+#<NameError: UrlInfoResult>
