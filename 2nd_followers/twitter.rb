@@ -121,8 +121,12 @@ class TwitterAPI
   # +twitter_id+ is the name or integer id of a twitter user.
   #
   def get_profile( twitter_id )    
-    data = Net::HTTP.get_response('twitter.com', "/users/show/#{twitter_id}.json").body
-  
+    if twitter_id.class == Fixnum
+      data = Net::HTTP.get_response('twitter.com', "/users/show.json?user_id=#{twitter_id}").body
+    else
+      data = Net::HTTP.get_response('twitter.com', "/users/show/#{twitter_id}.json").body
+    end
+    
     # we convert the returned JSON data to native Ruby
     # data structure - a hash
     result = JSON.parse(data)
